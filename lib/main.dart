@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'system_monitor.dart';
+import 'stock_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'System Monitor',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
@@ -28,11 +30,21 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('System Monitor'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('System Monitor'),
       ),
-      body: const SingleChildScrollView(
-        child: SystemMonitorWidget(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const StockWidget(defaultSymbol: 'AAPL'),
+              const SizedBox(height: 16),
+              const SystemMonitorWidget(),
+            ],
+          ),
+        ),
       ),
     );
   }
